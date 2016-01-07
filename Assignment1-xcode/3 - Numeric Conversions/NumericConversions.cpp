@@ -40,14 +40,14 @@ string intToString(int n) {
             stringInt += ch - '0';
         }
         else {
+            string subStart = str.substr(0, str.length()-1);
+            string subEnd = str.substr(str.length() - 1, str.length());
             
-            
-            
-            return stringInt;
-        
+            return stringToInt(subStart)*10 + stringToInt(subEnd);
         }
         return stringInt;
     }
+
 
 
 
@@ -61,19 +61,8 @@ string intToString(int n) {
     int main() {
 
         cout << intToString(137) << endl;
-        cout << stringToInt("90") << endl;
+        cout << stringToInt("9904") << endl;
 
-        int sent = 0;
-        int max = 0;
-        while (true) {
-            int num = getInteger("?");
-            
-            if (num == sent) break;
-            if (num > max) {
-                max = num;
-            }
-        }
-        cout << "The largest value is " << max << endl;
         
     return 0;
     }
