@@ -27,45 +27,39 @@ int pascal (int row, int col) {
 
 
 int samPascal (int row, int col) {
-    if (col == 0) {
+    if (row == 0) {
         return 1;
     }
-    
-    
-    return 0;
-}
-    
-double toFeet (double meters) {
-    double inch = meters / .0254;
-    double feet = inch/12;
-    
-    return feet;
+    else if (col == 0){
+        return samPascal (row - 1, row - 1);
+    }
+    else {
+        return samPascal (row - 1, col - 1) + samPascal (row, col - 1);
+    }
 }
 
-//
-//int total = 0;
-//
-//for (int i = 0; i <= 100; i++) {
-//    total = total + i;
-//    cout << i << " " << total << endl;
-//    }
-//    cout << total;
-
-
-int oddInts (int n) {
-    int oddTotal = 0;
-    int currentOdd = 0;
+int oddTotal (int N) {
+    int total = 0;
     
-    for (int i = 0; i < n; i++) {
-        currentOdd = 
+    int oddNum = 1;
+    int prevOddNum = 0;
+    
+    for (int i = 0; i < N; i++) {
+        prevOddNum = oddNum;
+        oddNum += 2;
+        total = oddNum + prevOddNum;
+    
     }
     
-    return oddTotal;
+    return total;
 }
+
+
 
 int main() {
     
-    cout << toFeet(100);
+    cout <<samPascal(4,3) << endl;
+    
     
     return 0;
 }
