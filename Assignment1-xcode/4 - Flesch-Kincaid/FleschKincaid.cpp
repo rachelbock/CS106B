@@ -53,7 +53,6 @@ using namespace std;
 //    }
 //}
 
-// TO DO: IF FILENAME IS INVALID - REPROMPT.
 
 
 void tokenCount (string filename) {

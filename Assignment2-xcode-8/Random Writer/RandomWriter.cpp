@@ -16,7 +16,8 @@
 using namespace std;
 const int numStrings = 2000;
 
-void randomWriter(HashMap<string, Vector<string> > hMap) {
+string randomWriter(HashMap<string, Vector<string> > hMap) {
+    string finalStr = "";
     Vector<string> mapKeys = hMap.keys();
     int maxSize = 0;
     string bestKey = "";
@@ -32,21 +33,23 @@ void randomWriter(HashMap<string, Vector<string> > hMap) {
     Vector<string> bestValue = hMap.get(bestKey);
     int randomI = randomInteger(0, bestValue.size() - 1);
     string nextStr = bestValue[randomI];
-    cout << bestKey << nextStr;
+    finalStr += bestKey;
+    finalStr += nextStr;
     
     for (int i = 0; i < numStrings; i ++) {
         Vector<string> nextValue = hMap.get(nextStr);
         int randomNextInt = randomInteger(0, nextValue.size()-1);
         string next = nextValue[randomNextInt];
-        cout << next;
+        finalStr+= next;
         nextStr = next;
     }
+    return finalStr;
 }
 
 
-void randomWriterReader (string filename, int n) {
+
+string randomWriterReader (string filename, int n) {
     
-    string randomText = " ";
     HashMap<string, Vector<string> > hMap;
     
     
@@ -61,25 +64,31 @@ void randomWriterReader (string filename, int n) {
     }
     
     for (int i = 0; i < text.size() - n; i++) {
+        
         string key = "";
         key += text[i];
         string value = "";
-        value += text[i+1];
-        Vector<string> newVect;
+        
+        for (int j = 1; j < n; j++) {
+            key += text[i+j];
+            if (j == n-1) {
+                value += text[i+n];
+            }
+        }
         
         if (hMap.containsKey(key)) {
             Vector<string>& existingValue = hMap[key];
             existingValue.add(value);
         }
         else {
+            Vector<string> newVect;
             newVect.add(value);
             hMap.add(key, newVect);
         }
-        
-//        cout << key << endl;
+
     }
     
-    randomWriter(hMap);
+   return randomWriter(hMap);
 }
 
 bool fileExists(string filename) {
@@ -94,7 +103,7 @@ int main() {
         string str = getLine("Enter the source text: ");
         int n = getInteger("Enter the Markov order [1-10]: ");
         if (fileExists(str)) {
-            randomWriterReader (str, n);
+            cout << randomWriterReader (str, n);
             break;
         }
     }
