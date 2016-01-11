@@ -5,6 +5,7 @@
  *
  */
 
+#include <chrono>
 #include <iostream>
 #include "console.h"
 #include "simpio.h"
@@ -17,47 +18,12 @@
 using namespace std;
 
 
-bool wordLadder (string start, string end) {
-    
-    bool isWordLadder = false;
-    Lexicon dict ("/usr/share/dict/words");
-    Vector <string> ladder;
-    Queue <Vector<string> > q;
-    HashSet<string> hs;
-    
-    if (dict.contains(start)) {
-        ladder.add(start);
-        q.enqueue(ladder);
-        hs.add(start);
-    }
-    else {
-        cout << "not a valid starting word" << endl;
-    }
-    
-    
-    while (!q.isEmpty()) {
-        q.dequeue();
-        // if (the last element in the vector just dequeued == end) { return the word ladder as the solution}
-    
-        
-    }
-    
-    
-    
-    
-    return isWordLadder;
-}
-
-
-// Words that differ by just one letter
-
-HashSet<string> wordsDifferingByOneLetter (Lexicon dictionary, string str) {
-    HashSet<string> words;
+void wordsDifferingByOneLetter (Lexicon dictionary, string str, HashSet<string>& words) {
+    words.clear();
     
     for (string word : dictionary) {
         int count = 0;
         if (word.length() == str.length()) {
-            
             for (int i = 0; i < word.length(); i++) {
                 if (word[i] != str[i]) {
                     count += 1;
@@ -69,9 +35,63 @@ HashSet<string> wordsDifferingByOneLetter (Lexicon dictionary, string str) {
         }
         count = 0;
     }
-            
-    return words;
+}
+
+
+
+bool wordLadder (string start, string end) {
+//    chrono::milliseconds startTime = chrono::duration_cast< chrono::milliseconds >(chrono::system_clock::now().time_since_epoch());
     
+    Lexicon dict ("/usr/share/dict/words");
+    Vector <string> ladder;
+    Queue <Vector<string> > q;
+    HashSet<string> usedWords;
+    
+    HashSet<string> wordsOffByOne;
+    
+    if (start.size() != end.size()) {
+        cout << "starting and ending words must be the same length - this is not a word ladder." << endl;
+        return false;
+    }
+    
+    else if (dict.contains(start)) {
+        ladder.add(start);
+        q.enqueue(ladder);
+        usedWords.add(start);
+    }
+    else {
+        cout << "not a valid starting word" << endl;
+    }
+    
+    
+    while (!q.isEmpty()) {
+        Vector <string> reviewLadder = q.dequeue();
+
+        wordsDifferingByOneLetter(dict, reviewLadder[reviewLadder.size()-1], wordsOffByOne);
+        for (string word : wordsOffByOne) {
+            if (usedWords.contains(word)) {
+                //do nothing
+            }
+            else {
+                Vector<string> newLadder;
+                for (int i = 0; i < reviewLadder.size(); i++) {
+                    newLadder.add(reviewLadder[i]);
+                }
+                newLadder.add(word);
+                usedWords.add(word);
+                q.add(newLadder);
+                
+                if (word == end) {
+                    cout << "This is a word ladder" << newLadder << endl;
+                    return true;
+                }
+            }
+        }
+        
+        
+    }
+    cout << "There is no word ladder" << endl;
+    return false;
 }
 
 

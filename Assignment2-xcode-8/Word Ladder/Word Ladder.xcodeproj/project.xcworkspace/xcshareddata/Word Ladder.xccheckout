@@ -10,29 +10,29 @@
 	<string>Word Ladder</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>55177220-11AC-4EAB-982A-BB6E70EF012C</key>
+		<key>FAF108B2FF188B28D5B58EE4C14065C058BBE828</key>
 		<string>https://github.com/rachelbock/CS106B.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Assignment2-xcode-8/Word Ladder/Word Ladder.xcodeproj/project.xcworkspace</string>
+	<string>Assignment2-xcode-8/Word Ladder/Word Ladder.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>55177220-11AC-4EAB-982A-BB6E70EF012C</key>
+		<key>FAF108B2FF188B28D5B58EE4C14065C058BBE828</key>
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/rachelbock/CS106B.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>55177220-11AC-4EAB-982A-BB6E70EF012C</string>
+	<string>FAF108B2FF188B28D5B58EE4C14065C058BBE828</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>55177220-11AC-4EAB-982A-BB6E70EF012C</string>
+			<string>FAF108B2FF188B28D5B58EE4C14065C058BBE828</string>
 			<key>IDESourceControlWCCName</key>
 			<string>CS106B</string>
 		</dict>
