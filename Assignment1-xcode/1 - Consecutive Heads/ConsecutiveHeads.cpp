@@ -10,6 +10,12 @@
 #include <iostream>
 #include "console.h"
 #include "random.h"
+#include <fstream>
+#include "strlib.h"
+#include "tokenscanner.h"
+#include "vector.h"
+#include "simpio.h"
+#include "lexicon.h"
 
 using namespace std;
 
@@ -100,25 +106,170 @@ using namespace std;
 //    }
 //}
 
+//
+//string randomShuffle (string input) {
+//    int randomI = randomInteger(0, input.size()-1);
+//    string randomChar;
+//    randomChar += input[randomI];
+//    
+//    if (input.size() < 2) {
+//        return input;
+//    }
+//    else {
+//        input.erase(randomI, 1);
+//        return randomChar + randomShuffle(input);
+//    }
+//}
 
-string randomShuffle (string input) {
-    int randomI = randomInteger(0, input.size()-1);
-    string randomChar;
-    randomChar += input[randomI];
+
+
+void averageValueinFile (string filename, double& result) {
+    ifstream input;
+    input.open(filename);
     
-    if (input.size() < 2) {
-        return input;
+    string line;
+    string text;
+    
+    while (getline(input, line)) {
+        text += line + "\n";
+    }
+    int total = 0;
+    for (int i = 0; i < text.size(); i++) {
+        string strnum = "";
+        strnum += text[i];
+        int num = stringToInteger(strnum);
+        total += num;
+    }
+    result = total/text.size();
+}
+
+int syllablesIn (string word) {
+    int syllables = 0;
+    char prevCh = ' ';
+    for (int i = 0; i < word.size(); i++) {
+        char ch = word[i];
+        if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' || ch == 'y') {
+            if (prevCh == ' ') {
+                syllables +=1;
+                if (ch == 'e' && i == word.size() - 1 && syllables > 1) {
+                    syllables -=1;
+                }
+            }
+            prevCh = ch;
+            
+        }
+        
+        else {
+            prevCh = ' ';
+        }
+    }
+    return syllables;
+    
+}
+
+bool haikuDetector (string filename) {
+    
+    Vector<string> tokens;
+    ifstream input;
+    input.open(filename);
+    
+    TokenScanner scanner(input);
+    while (scanner.hasMoreTokens()) {
+        string token = scanner.nextToken();
+        if (token != " ") {
+            tokens.add(token);
+        }
+    }
+    int firstLineSyllables = 0;
+    int secondLineSyllables = 0;
+    int thirdLineSyllables = 0;
+    int lineNum = 0;
+    for (int i = 0; i < tokens.size(); i++) {
+        if (tokens[i] == "\n") {
+            lineNum += 1;
+        }
+        if (lineNum == 0) {
+            int syllables = syllablesIn(tokens[i]);
+            firstLineSyllables += syllables;
+        }
+        if (lineNum == 1) {
+            int syllables = syllablesIn(tokens[i]);
+            secondLineSyllables += syllables;
+        }
+        if (lineNum == 2) {
+            int syllables = syllablesIn(tokens[i]);
+            thirdLineSyllables += syllables;
+        }
+        
+        
+        
+    }
+    cout << firstLineSyllables << endl;
+    cout << secondLineSyllables << endl;
+    cout << thirdLineSyllables << endl;
+    
+    if (firstLineSyllables == 5 && secondLineSyllables == 7 && thirdLineSyllables == 5) {
+        cout << "yay Haiku!" << endl;
+        return true;
+        
     }
     else {
-        input.erase(randomI, 1);
-        return randomChar + randomShuffle(input);
+        cout << "boo no Haiku" << endl;
+        return false;
+        
     }
 }
 
 
+
+
+
+
+
+
+
+string mostXzibitWord(Lexicon& words) {
+    
+    string bestWord = "";
+    int mostSubs = 0;
+    
+    for (string word : words) {
+        int numSubs = 0;
+        for (int i = 0; i < word.length(); i++) {
+            for (int j = 0; j < word.length(); j++) {
+                string sub = word.substr (word[i], word[j]);
+                if (words.contains(sub)) {
+                    numSubs +=1;
+                }
+                else {
+                    break;
+                }
+            }
+        
+        }
+        if (numSubs > mostSubs) {
+            mostSubs = numSubs;
+            bestWord = word;
+        }
+    }
+
+    return bestWord;
+}
+
+
+
+
+
+
+
+
+
 int main() {
 
-    cout << randomShuffle("plausible") << endl;
+    Lexicon words = Lexicon("LexiconForTest.txt");
+    cout << mostXzibitWord(words) << endl;
+
+    
 
     
     
@@ -127,13 +278,25 @@ int main() {
     
     
     
-//    cout << cannonballs(4) << endl;
-//    
-//    cout << DigitalRoot(1729) << endl;
-//    
-//    cout << GCD(24, 18) << endl;
     
-//    int numOfFlips = 0;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //    int numOfFlips = 0;
 //    int numofHeads = 0;
 //    
 //    while (numofHeads <3) {
