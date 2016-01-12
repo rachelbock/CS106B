@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ConsecutiveHeads.cpp"
-            timestampString = "474248660.763564"
+            timestampString = "474269657.237522"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "main()"
             landmarkType = "7">
          </BreakpointContent>

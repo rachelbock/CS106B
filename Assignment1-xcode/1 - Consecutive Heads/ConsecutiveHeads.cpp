@@ -13,34 +13,20 @@
 
 using namespace std;
 
-int cannonballs (int height) {
 
-    if (height == 1) {
-        return height;
-    }
-    else {
-        int squared = height*height;
-        return squared + cannonballs(height - 1);
-        
-    }
-    
-}
-
-
-
-
-//int DigitalRoot(int n) {
-//    int digitSum = 0;
-//    if (n < 10) {
-//        digitSum = n;
+//int cannonballs (int height) {
+//
+//    if (height == 1) {
+//        return height;
 //    }
 //    else {
-//        int divN = n/10;
-//        int modN = n%10;
-//        
+//        int squared = height*height;
+//        return squared + cannonballs(height - 1);
+//
 //    }
+//
 //}
-
+//
 //int DigitSum(int n) {
 //    if (n < 10) {
 //        return n;
@@ -48,8 +34,32 @@ int cannonballs (int height) {
 //    else {
 //        int divN = n/10;
 //        int modN = n%10;
-//        
+//
 //        return DigitSum(divN) + modN;
+//    }
+//}
+//
+//
+//int DigitalRoot(int n) {
+//    if (n < 10) {
+//        return n;
+//    }
+//    else {
+//        int num = DigitSum(n);
+//        return DigitalRoot(num);
+//    }
+//
+//}
+//
+//int GCD (int x, int y) {
+//    if (x%y == 0) {
+//        return y;
+//    }
+//
+//    else {
+//        int num = x%y;
+//        return GCD(y, num);
+//
 //    }
 //}
 
@@ -91,10 +101,37 @@ int cannonballs (int height) {
 //}
 
 
+string randomShuffle (string input) {
+    int randomI = randomInteger(0, input.size()-1);
+    string randomChar;
+    randomChar += input[randomI];
+    
+    if (input.size() < 2) {
+        return input;
+    }
+    else {
+        input.erase(randomI, 1);
+        return randomChar + randomShuffle(input);
+    }
+}
+
 
 int main() {
 
-    cout << cannonballs(4) << endl;
+    cout << randomShuffle("plausible") << endl;
+
+    
+    
+    
+    
+    
+    
+    
+//    cout << cannonballs(4) << endl;
+//    
+//    cout << DigitalRoot(1729) << endl;
+//    
+//    cout << GCD(24, 18) << endl;
     
 //    int numOfFlips = 0;
 //    int numofHeads = 0;

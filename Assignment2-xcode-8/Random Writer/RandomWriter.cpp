@@ -35,19 +35,33 @@ string randomWriter(HashMap<string, Vector<string> > hMap, int n) {
     string nextStr = bestValue[randomI];
     finalStr += bestKey;
     finalStr += nextStr;
-    nextStr = bestKey[n-1] + nextStr;
+    nextStr = "";
+    
+    for (int i = 1; i < n; i++) {
+        nextStr += bestKey[i];
+    }
+    
+    nextStr += bestValue[randomI];
     
     for (int i = 0; i < numStrings; i ++) {
         
         Vector<string> nextValue = hMap.get(nextStr);
-        cout <<nextValue<< endl;
         
-        int randomNextInt = randomInteger(0, nextValue.size()-1);
-        string next = nextValue[randomNextInt];
-        finalStr+= next;
-        nextStr = nextStr [n-1] + next;
+        if (nextValue.isEmpty()) {
+            nextStr = bestKey;
+        }
+        else {
+            int randomNextInt = randomInteger(0, nextValue.size()-1);
+            string next = nextValue[randomNextInt];
+            finalStr+= next;
+            string currentKey = nextStr;
+            nextStr = "";
         
-        
+            for (int j = 1; j < n; j++) {
+                nextStr += currentKey[j];
+            }
+            nextStr += next;
+        }
     }
     return finalStr;
 }

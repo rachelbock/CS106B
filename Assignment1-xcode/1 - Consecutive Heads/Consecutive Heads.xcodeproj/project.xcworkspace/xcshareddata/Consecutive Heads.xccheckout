@@ -10,29 +10,29 @@
 	<string>Consecutive Heads</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>2729125A-440D-4E8A-A38A-36169C2F5B79</key>
+		<key>FAF108B2FF188B28D5B58EE4C14065C058BBE828</key>
 		<string>https://github.com/rachelbock/CS106B.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Assignment1-xcode/1 - Consecutive Heads/Consecutive Heads.xcodeproj/project.xcworkspace</string>
+	<string>Assignment1-xcode/1 - Consecutive Heads/Consecutive Heads.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>2729125A-440D-4E8A-A38A-36169C2F5B79</key>
+		<key>FAF108B2FF188B28D5B58EE4C14065C058BBE828</key>
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/rachelbock/CS106B.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>2729125A-440D-4E8A-A38A-36169C2F5B79</string>
+	<string>FAF108B2FF188B28D5B58EE4C14065C058BBE828</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>2729125A-440D-4E8A-A38A-36169C2F5B79</string>
+			<string>FAF108B2FF188B28D5B58EE4C14065C058BBE828</string>
 			<key>IDESourceControlWCCName</key>
 			<string>CS106B</string>
 		</dict>
