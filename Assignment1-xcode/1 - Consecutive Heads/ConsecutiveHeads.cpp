@@ -236,14 +236,12 @@ string mostXzibitWord(Lexicon& words) {
     for (string word : words) {
         int numSubs = 0;
         for (int i = 0; i < word.length(); i++) {
-            for (int j = 0; j < word.length(); j++) {
-                string sub = word.substr (word[i], word[j]);
+            for (int j = 1; j < word.length()-1; j++) {
+                string sub = word.substr (i, j);
                 if (words.contains(sub)) {
                     numSubs +=1;
                 }
-                else {
-                    break;
-                }
+               
             }
         
         }
@@ -252,7 +250,7 @@ string mostXzibitWord(Lexicon& words) {
             bestWord = word;
         }
     }
-
+    
     return bestWord;
 }
 
