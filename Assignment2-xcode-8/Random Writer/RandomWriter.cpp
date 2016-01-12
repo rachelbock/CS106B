@@ -16,7 +16,7 @@
 using namespace std;
 const int numStrings = 2000;
 
-string randomWriter(HashMap<string, Vector<string> > hMap) {
+string randomWriter(HashMap<string, Vector<string> > hMap, int n) {
     string finalStr = "";
     Vector<string> mapKeys = hMap.keys();
     int maxSize = 0;
@@ -35,13 +35,19 @@ string randomWriter(HashMap<string, Vector<string> > hMap) {
     string nextStr = bestValue[randomI];
     finalStr += bestKey;
     finalStr += nextStr;
+    nextStr = bestKey[n-1] + nextStr;
     
     for (int i = 0; i < numStrings; i ++) {
+        
         Vector<string> nextValue = hMap.get(nextStr);
+        cout <<nextValue<< endl;
+        
         int randomNextInt = randomInteger(0, nextValue.size()-1);
         string next = nextValue[randomNextInt];
         finalStr+= next;
-        nextStr = next;
+        nextStr = nextStr [n-1] + next;
+        
+        
     }
     return finalStr;
 }
@@ -64,12 +70,12 @@ string randomWriterReader (string filename, int n) {
     }
     
     for (int i = 0; i < text.size() - n; i++) {
-        
         string key = "";
-        key += text[i];
         string value = "";
         
-        for (int j = 1; j < n; j++) {
+  
+        for (int j = 0; j < n; j++) {
+            
             key += text[i+j];
             if (j == n-1) {
                 value += text[i+n];
@@ -85,10 +91,10 @@ string randomWriterReader (string filename, int n) {
             newVect.add(value);
             hMap.add(key, newVect);
         }
-
+       
     }
     
-   return randomWriter(hMap);
+   return randomWriter(hMap, n);
 }
 
 bool fileExists(string filename) {

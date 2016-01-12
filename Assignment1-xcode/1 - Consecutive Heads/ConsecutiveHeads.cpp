@@ -26,6 +26,9 @@ int cannonballs (int height) {
     
 }
 
+
+
+
 //int DigitalRoot(int n) {
 //    int digitSum = 0;
 //    if (n < 10) {
@@ -91,7 +94,7 @@ int cannonballs (int height) {
 
 int main() {
 
-    cout << cannonballs(4);
+    cout << cannonballs(4) << endl;
     
 //    int numOfFlips = 0;
 //    int numofHeads = 0;
