@@ -17,9 +17,13 @@ using namespace std;
 /* Given a set of integers, returns a uniformly-random subset of that
  * set.
  */
-Set<int> randomSubsetOf(Set<int>& s);
+Set<int> randomSubsetOf(Set<int>& s) {
+    
+}
+
+
 
 int main() {
-    // [TODO: fill with your code]
+    
     return 0;
 }
