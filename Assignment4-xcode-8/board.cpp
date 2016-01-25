@@ -48,41 +48,42 @@ int board :: getNumCubes() {
 
 void board :: cubeArrangement() {
     
-    if (numCubes == 16) {
-        
-        Vector <int> rowVec;
-        for (int i = 0; i < rows; i++ ) {
-            rowVec.add(i);
-        }
-        Vector<int> colVec;
-        for (int i = 0; i < cols; i++) {
-            colVec.add(i);
-        }
-        
-        for (int i = 0; i < numCubes; i++) {
-           
-            int randomRow = randomInteger(0, rowVec.size()-1);
-            int randomCol = randomInteger(0, colVec.size()-1);
-            
-            cube newCube = STANDARD_CUBES[i];
-            char cubeFace = newCube.getCube();
-            
-            labelCube(rowVec[randomRow], colVec[randomCol], cubeFace);
-            rowVec.remove(randomRow);
-            colVec.remove(randomCol);
-        }
-        
-        
+    Vector<char> cubeVec;
+    
+    Vector<int> indexes;
+    for (int j = 0; j < numCubes; j++) {
+        indexes.add(j);
     }
     
-    else if (numCubes == 25) {
+    for (int i = 0; i < numCubes; i++) {
         
-        int randomRow = randomInteger(0,rows -1);
-        int randomCol = randomInteger(0,cols-1);
-        cout << randomRow << " " << randomCol << endl;
+        int randomIndex = randomInteger(0, indexes.size()-1);
         
+        cube newCube = STANDARD_CUBES[indexes[randomIndex]];
+        char cubeFace = newCube.getCube();
+
+        indexes.remove(randomIndex);
+        cubeVec.add(cubeFace);
     }
+    
+    //This code adds the cubes to the board grid. Need to come back and clean up code.
+    
+    for (int i = 0; i < cols; i++) {
+        labelCube(0, i, cubeVec[i]);
+    }
+    for (int i = 0; i < cols; i++) {
+        labelCube(1, i, cubeVec[i+4]);
+    }
+    for (int i = 0; i < cols; i++) {
+        labelCube(2, i, cubeVec[i+8]);
+    }
+    for (int i = 0; i < cols; i++) {
+        labelCube(3, i, cubeVec[i+12]);
+    }
+    
 }
+
+
 
 void board :: drawNewBoard() {
     drawBoard(rows, cols);
