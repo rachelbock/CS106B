@@ -11,7 +11,6 @@
 
 #include <iostream>
 #include <string>
-#include "foreach.h"
 
 /*
  * Type: Direction

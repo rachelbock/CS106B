@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6B1E3358-E390-492C-B48D-37B98A6773FE</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Sierpinski</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C096A832-EB2E-4789-9B94-9990FDEA73AA</key>
+		<string>https://github.com/rachelbock/CS106B.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Assignment3-xcode-8/2 Sierpinski/Sierpinski.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C096A832-EB2E-4789-9B94-9990FDEA73AA</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/rachelbock/CS106B.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C096A832-EB2E-4789-9B94-9990FDEA73AA</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C096A832-EB2E-4789-9B94-9990FDEA73AA</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CS106B</string>
+		</dict>
+	</array>
+</dict>
+</plist>

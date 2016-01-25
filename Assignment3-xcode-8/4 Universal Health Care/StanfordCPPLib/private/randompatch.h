@@ -49,7 +49,7 @@ static int _seed = 1;
 
 #  include <cstdlib>
 
-   static time_t patchedTime(time_t *dummy) {
+   static time_t patchedTime(time_t *) {
       char *str = getenv("RANDOM_SEED");
       if (str == NULL) {
          return time(NULL);

@@ -18,12 +18,39 @@ using namespace std;
  * set.
  */
 Set<int> randomSubsetOf(Set<int>& s) {
+    Set<int> returnSet;
     
+    if (s.size() == 1) {
+        bool isTrue = randomBool();
+        if (isTrue == true) {
+            returnSet.add(s.first());
+        }
+        return returnSet;
+    }
+    else {
+        bool isTrue = randomBool();
+        if (isTrue == true) {
+            returnSet.add(s.first());
+        }
+        s.remove(s.first());
+        Set<int> subSet = randomSubsetOf(s);
+        returnSet += subSet;
+    }
+    
+    return returnSet;
 }
 
 
 
 int main() {
+    Set<int> randomInts;
+    for (int i = 0; i < 10; i++) {
+        randomInts.add(i);
+    }
+    
+    cout << randomInts << endl;
+    
+    cout << randomSubsetOf(randomInts) << endl;
     
     return 0;
 }
