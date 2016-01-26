@@ -27,6 +27,7 @@ private:
     int cols;
     int numCubes;
     void cubeArrangement();
+    // Grid here?
 
 } ;
 

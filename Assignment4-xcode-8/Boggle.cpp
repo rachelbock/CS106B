@@ -17,6 +17,7 @@
 #include "simpio.h"
 #include "board.h"
 #include "cube.h"
+#include "hashset.h"
 using namespace std;
 
 /* Constants */
@@ -26,23 +27,26 @@ const int BOGGLE_WINDOW_HEIGHT = 350;
 
 
 /* Function prototypes */
-
+void gamePlay();
 void welcome();
 void giveInstructions();
+void guessWord ();
+bool isGuessOnBoard (string str);
 
 /* Main program */
 
 int main() {
-    GWindow gw(BOGGLE_WINDOW_WIDTH, BOGGLE_WINDOW_HEIGHT);
-    initGBoggle(gw);
-    board newBoard(4,4);
-    newBoard.drawNewBoard();
+   
     welcome();
     string line = getLine("Would you like to read the instructions?");
     if (toLowerCase(line) == "yes") {
-    giveInstructions();
-
+        giveInstructions();
     }
+    GWindow gw(BOGGLE_WINDOW_WIDTH, BOGGLE_WINDOW_HEIGHT);
+    initGBoggle(gw);
+    gamePlay();
+    guessWord();
+    
     
     return 0;
 }
@@ -92,9 +96,59 @@ void giveInstructions() {
     cout << "or triple your paltry score." << endl << endl;
     cout << "Hit return when you're ready...";
     getLine();
+    
 }
 
 
-void boardSetup () {
-   ;
+void gamePlay () {
+    board newBoard(4,4);
+    newBoard.drawNewBoard();
 }
+
+void guessWord() {
+    
+    Lexicon dictionary ("/usr/share/dict/words");
+    HashSet <string> guessedWords;
+    
+    cout <<endl << "Ok, take all the time you want and find all the words you can. Signal that you're finished by entering an empty line" << endl << endl;
+    
+    while(true) {
+        
+        string guess = getLine("Enter a word: ");
+        if (guess == "") {
+            break;
+        }
+//        if (!guessedWords.contains(guess)){
+//            guessedWords.add(guess);
+//        if (dictionary.contains(guess)) {
+//            if (isGuessOnBoard(guess)) {
+//                //add to human player words
+//                recordWordForPlayer(guess, HUMAN);
+//                //assign points
+//                
+//            
+//            }
+//            else {
+//                cout << "This word is not on the board." << endl;
+//            }
+//        }
+//        else {
+//            cout << "This is not a valid word." << endl;
+//        }
+//        
+//    }
+//        else {
+//            cout << "This word has already been guessed." << endl;
+//        }
+//    }
+        cout << "Done";
+}
+//
+//bool isGuessOnBoard(string str, board gameBoard) {
+//    
+//    
+//    return false;
+//}
+}
+
+
