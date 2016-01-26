@@ -13,6 +13,7 @@
 #include "gboggle.h"
 #include "vector.h"
 #include "grid.h"
+#include "simpio.h"
 
 using namespace std;
 
@@ -42,7 +43,8 @@ board :: board(int numRows, int numCols) {
     rows = numRows;
     cols = numCols;
     numCubes = rows * cols;
-    //add grid here?
+    Grid<char> gameGrid(rows, cols);
+    
 }
 
 int board :: getRows() {
@@ -53,6 +55,18 @@ int board :: getCols() {
 }
 int board :: getNumCubes() {
     return numCubes;
+}
+
+
+bool board :: contains(char c) {
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (gameGrid[i][j] == c) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 void board :: cubeArrangement() {
@@ -76,16 +90,39 @@ void board :: cubeArrangement() {
         }
     }
    
-    
-    
 }
 
+//in progress - non functional yet
 
+void board :: TestcubeArrangement() {
+    cout << endl;
+    string line = getLine("Enter in your own 16 character string: ");
+//    
+//    if (line.size() == 16) {
 
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    int index = (i*4) + j;
+                    string letter;
+                    letter += line[index];
+                    cube newCube = letter;
+                    char cubeFace = newCube.getCube();
+                    gameGrid.set(i, j, cubeFace);
+                    labelCube(i, j, cubeFace);
+                }
+            }
+
+    
+//    }
+//    else {
+//        cout << "That was not 16 chars, idiot!" << endl;
+//    }
+}
 
 void board :: drawNewBoard() {
     drawBoard(rows, cols);
-    cubeArrangement();
+    //    cubeArrangement();
+    TestcubeArrangement();
     
 }
 

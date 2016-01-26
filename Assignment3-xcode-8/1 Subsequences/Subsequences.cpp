@@ -57,7 +57,7 @@ bool isSubsequence(string text, string subsequence) {
 
 int main() {
 
-    cout << isSubsequence("springtime", "pints") << endl;;
+    cout << isSubsequence("springtime", "pint") << endl;;
     
     cout << reverseString("algorithm") << endl;
 

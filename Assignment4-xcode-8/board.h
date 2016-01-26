@@ -10,6 +10,7 @@
 #define Boggle_board_h
 
 #include "cube.h"
+#include "grid.h"
 
 class board {
 
@@ -18,7 +19,8 @@ public:
     int getRows();
     int getCols();
     int getNumCubes();
-    void drawNewBoard(); 
+    void drawNewBoard();
+    bool contains(char c);
     
     
     
@@ -26,8 +28,9 @@ private:
     int rows;
     int cols;
     int numCubes;
+    Grid<char> gameGrid;
     void cubeArrangement();
-    // Grid here?
+    void TestcubeArrangement();
 
 } ;
 

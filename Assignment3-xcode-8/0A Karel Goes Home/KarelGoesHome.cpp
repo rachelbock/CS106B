@@ -43,12 +43,14 @@ void printDecimal (int n, string prefix = "") {
     }
 }
 
-
+//Karel problem. Given the location of the robot, how can he get back to 0,0?
 int numPathsHome(int street, int avenue) {
+    //base case - if he's at 1,1 then he's exactly one path from home. Return 1 as the number of paths.
     if (avenue == 1 || street == 1) {
         return 1;
     }
     else {
+        //recursive step - if he's further than 1,1 away, how can we get him there? Run the same program on street -1 + avenue -1 and that will add up the number of paths home.
         return numPathsHome(street - 1, avenue) + numPathsHome(street, avenue - 1);
         
     }
@@ -125,6 +127,7 @@ void stringPermutation (string str, string chosen) {
 
 int main() {
     diceSum(3, 3);
+    stringPermutation("Hello", "");
     
     
     return 0;
