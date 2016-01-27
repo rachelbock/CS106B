@@ -34,12 +34,14 @@ string reverseString (string str) {
 
 
 bool isSubsequence(string text, string subsequence) {
-    
+    // if the subsequence is just one character long, check to see that text contains that character and if so, return true. Base case.
     if (subsequence.length() == 1) {
         if (stringContains(text, subsequence)) {
             return true;
         }
     }
+    //If the substring is more than one character long - create a new string that holds the first character of the subsequence string. Check to see if the text contains that one charater string. If it doesn't we can return false. If it does, make a substring of the text file starting at one character past where the character was through the end of the text. Create another text file to remove that character from the subsequence. Repeat the process until you're down to the last character in the subsequence and it meets the base case. 
+    //Recursive Case.
     else {
         string char1 = "";
         char1 += subsequence[0];

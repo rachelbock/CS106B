@@ -19,7 +19,12 @@ cube :: cube (string str) {
 }
 
 char cube :: getCube() {
+    if (cubeStr.size() > 1) {
     int randomInt = randomInteger(0, numSides-1);
     char topChar = cubeStr[randomInt];
     return topChar;
+    }
+    else {
+        return stringToChar(cubeStr);
+    }
 }

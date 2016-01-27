@@ -27,16 +27,16 @@ const int BOGGLE_WINDOW_HEIGHT = 350;
 
 
 /* Function prototypes */
-void gamePlay();
+void gamePlay(board gameBoard);
 void welcome();
 void giveInstructions();
-void guessWord ();
-bool isGuessOnBoard (string str);
+void guessWord (board gameBoard);
+bool isGuessOnBoard (string str, board gameBoard);
 
 /* Main program */
 
 int main() {
-   
+    board gameBoard(4,4);
     welcome();
     string line = getLine("Would you like to read the instructions?");
     if (toLowerCase(line) == "yes") {
@@ -44,8 +44,7 @@ int main() {
     }
     GWindow gw(BOGGLE_WINDOW_WIDTH, BOGGLE_WINDOW_HEIGHT);
     initGBoggle(gw);
-    gamePlay();
-    guessWord();
+    guessWord(gameBoard);
     
     
     return 0;
@@ -100,13 +99,29 @@ void giveInstructions() {
 }
 
 
-void gamePlay () {
-    board newBoard(4,4);
-    newBoard.drawNewBoard();
+
+//in progress - add check for location
+//maybe add / or something to the cube that has been used so no dups
+bool isGuessOnBoard(string str, board gameBoard) {
+    if (str.length() == 1) {
+        if (gameBoard.contains(stringToChar(str))) {
+            return true;
+        }
+    }
+    else {
+        string char1 = "";
+        char1 = str[0];
+        if (gameBoard.contains(stringToChar(char1))) {
+            string strSub = str.substr(1, str.length() -1);
+            return isGuessOnBoard(strSub, gameBoard);
+        }
+    }
+    return false;
 }
 
-void guessWord() {
-    
+//check for size
+void guessWord(board gameBoard) {
+    gameBoard.drawNewBoard();
     Lexicon dictionary ("/usr/share/dict/words");
     HashSet <string> guessedWords;
     
@@ -118,37 +133,32 @@ void guessWord() {
         if (guess == "") {
             break;
         }
-//        if (!guessedWords.contains(guess)){
-//            guessedWords.add(guess);
-//        if (dictionary.contains(guess)) {
-//            if (isGuessOnBoard(guess)) {
-//                //add to human player words
-//                recordWordForPlayer(guess, HUMAN);
-//                //assign points
-//                
-//            
-//            }
-//            else {
-//                cout << "This word is not on the board." << endl;
-//            }
-//        }
-//        else {
-//            cout << "This is not a valid word." << endl;
-//        }
-//        
-//    }
-//        else {
-//            cout << "This word has already been guessed." << endl;
-//        }
-//    }
-        cout << "Done";
+        if (guessedWords.contains(guess)){
+            cout << "This word has already been guessed." << endl;
+        }
+        else {
+            if (dictionary.contains(guess)) {
+                if (isGuessOnBoard(guess, gameBoard)) {
+                    guessedWords.add(guess);
+                    
+                    recordWordForPlayer(guess, HUMAN);
+                    
+                    cout << "yay" << endl;
+                }
+                else {
+                    cout << "This word is not on the board" << endl;
+                }
+            }
+            else {
+                cout << "This is not an english word" << endl;
+            }
+        }
+    }
+    cout << "Done";
+
 }
-//
-//bool isGuessOnBoard(string str, board gameBoard) {
-//    
-//    
-//    return false;
-//}
-}
+
+//Computer Recursion Function
+
 
 

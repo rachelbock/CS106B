@@ -32,18 +32,12 @@ const string BIG_BOGGLE_CUBES[25]  = {
     "FIPRSY", "GORRVW", "HIPRRY", "NOOTUW", "OOOTTU"
 };
 
-const string TEST_STANDARD_CUBES[16] = {
-    "CC", "AA", "RR", "TT",
-    "OO", "RR", "AA", "HH",
-    "AA", "MM", "AA", "EE",
-    "LL", "SS", "PP", "BB"
-};
 
 board :: board(int numRows, int numCols) {
     rows = numRows;
     cols = numCols;
     numCubes = rows * cols;
-    Grid<char> gameGrid(rows, cols);
+    gameGrid = Grid<char> (rows, cols);
     
 }
 
@@ -69,6 +63,7 @@ bool board :: contains(char c) {
     return false;
 }
 
+//for random letter arrangements
 void board :: cubeArrangement() {
     
     Grid<char> cubeGrid(rows, cols);
@@ -92,31 +87,35 @@ void board :: cubeArrangement() {
    
 }
 
-//in progress - non functional yet
+//For user input string and for testing;
 
 void board :: TestcubeArrangement() {
+    
+    while (true) {
     cout << endl;
     string line = getLine("Enter in your own 16 character string: ");
-//    
-//    if (line.size() == 16) {
+    
+    if (line.size() == 16) {
 
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < cols; j++) {
-                    int index = (i*4) + j;
+                    int index = (i*rows) + j;
                     string letter;
-                    letter += line[index];
+                    letter = line[index];
                     cube newCube = letter;
                     char cubeFace = newCube.getCube();
                     gameGrid.set(i, j, cubeFace);
                     labelCube(i, j, cubeFace);
                 }
             }
-
+        break;
     
-//    }
-//    else {
-//        cout << "That was not 16 chars, idiot!" << endl;
-//    }
+    }
+    else {
+        cout << endl;
+        cout << "That was not 16 chars, idiot!" << endl;
+    }
+    }
 }
 
 void board :: drawNewBoard() {
@@ -126,4 +125,5 @@ void board :: drawNewBoard() {
     
 }
 
+//HANDHANDHANDHAND
     
