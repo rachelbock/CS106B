@@ -18,6 +18,7 @@
 #include "board.h"
 #include "cube.h"
 #include "hashset.h"
+#include "timer.h"
 using namespace std;
 
 /* Constants */
@@ -30,12 +31,18 @@ const int BOGGLE_WINDOW_HEIGHT = 350;
 void gamePlay(board gameBoard);
 void welcome();
 void giveInstructions();
-void guessWord (board gameBoard);
-bool isGuessOnBoard (string str, board gameBoard);
+void guessWord (board gameBoard, HashSet<string>& guessedWords, Lexicon& dictionary);
+bool isGuessOnBoard (int x, int y, string str, board gameBoard);
+bool isCompWordOnBoard (int x, int y, string str, board gameBoard, Lexicon& dictionary, HashSet<string>& guessedWords);
+void computerTurn(board gameBoard, Lexicon& dictionary, HashSet<string>& guessedWords);
+                        
 
 /* Main program */
 
 int main() {
+    Lexicon dictionary ("/usr/share/dict/words");
+    HashSet <string> guessedWords;
+    
     board gameBoard(4,4);
     welcome();
     string line = getLine("Would you like to read the instructions?");
@@ -44,7 +51,8 @@ int main() {
     }
     GWindow gw(BOGGLE_WINDOW_WIDTH, BOGGLE_WINDOW_HEIGHT);
     initGBoggle(gw);
-    guessWord(gameBoard);
+    guessWord(gameBoard, guessedWords, dictionary);
+    computerTurn(gameBoard, dictionary, guessedWords);
     
     
     return 0;
@@ -100,53 +108,84 @@ void giveInstructions() {
 
 
 
-//in progress - add check for location
-//maybe add / or something to the cube that has been used so no dups
-bool isGuessOnBoard(string str, board gameBoard) {
-    if (str.length() == 1) {
-        if (gameBoard.contains(stringToChar(str))) {
-            return true;
-        }
+bool isGuessOnBoard(int x, int y, string str, board gameBoard) {
+    
+    if (str.length() == 1 && str[0] == gameBoard.charAt(x, y)) {
+        highlightCube(x, y, true);
+        return true;
+        
     }
     else {
-        string char1 = "";
-        char1 = str[0];
-        if (gameBoard.contains(stringToChar(char1))) {
-            string strSub = str.substr(1, str.length() -1);
-            return isGuessOnBoard(strSub, gameBoard);
+        if (str[0] == gameBoard.charAt(x, y)) {
+            gameBoard.markAsVisited(x, y);
+            highlightCube(x, y, true);
+        string strSub = str.substr(1, str.length() -1);
+            
+            for (int dx = -1; dx <= 1; dx++) {
+                for (int dy = -1; dy <=1; dy++) {
+                    if (dx !=0 || dy!= 0) {
+                        int newX = x + dx;
+                        int newY = y + dy;
+                        if (gameBoard.inBounds(newX, newY)) {
+                            bool isTrue = isGuessOnBoard(newX, newY, strSub,  gameBoard);
+                            if (isTrue) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
+
     return false;
 }
 
-//check for size
-void guessWord(board gameBoard) {
+//highlightcube still in progress
+void guessWord(board gameBoard, HashSet<string>& guessedWords, Lexicon& dictionary) {
     gameBoard.drawNewBoard();
-    Lexicon dictionary ("/usr/share/dict/words");
-    HashSet <string> guessedWords;
+    
     
     cout <<endl << "Ok, take all the time you want and find all the words you can. Signal that you're finished by entering an empty line" << endl << endl;
     
     while(true) {
-        
+        pause(500);
+        for (int i = 0; i < gameBoard.getRows(); i++) {
+            for (int j = 0;j < gameBoard.getCols(); j++) {
+                highlightCube(i, j, false);
+            }
+        }
         string guess = getLine("Enter a word: ");
+        
         if (guess == "") {
             break;
         }
-        if (guessedWords.contains(guess)){
+        if (guess.size() < 4) {
+            cout << "Words must be at least 4 characters long." << endl;
+        }
+        else if (guessedWords.contains(guess)){
             cout << "This word has already been guessed." << endl;
         }
         else {
             if (dictionary.contains(guess)) {
-                if (isGuessOnBoard(guess, gameBoard)) {
-                    guessedWords.add(guess);
+                bool hasBeenFound = false;
+                for (int i = 0; i < gameBoard.getRows(); i++) {
+                    for (int j = 0; j < gameBoard.getCols(); j++) {
+                        if (guess[0] == gameBoard.charAt(i, j)) {
+                            if (isGuessOnBoard(i, j, guess, gameBoard)) {
+                                hasBeenFound = true;
+                            }
+                        }
+                    }
+                }
+                if (hasBeenFound == false) {
+                    cout << "This word is not on the board" << endl;
                     
-                    recordWordForPlayer(guess, HUMAN);
-                    
-                    cout << "yay" << endl;
                 }
                 else {
-                    cout << "This word is not on the board" << endl;
+                    guessedWords.add(guess);
+                    recordWordForPlayer(guess, HUMAN);
+                    cout << "yay" << endl;
                 }
             }
             else {
@@ -159,6 +198,57 @@ void guessWord(board gameBoard) {
 }
 
 //Computer Recursion Function
+
+bool isCompWordOnBoard (int x, int y, string str, board gameBoard, Lexicon& dictionary, HashSet<string>& guessedWords) {
+    
+    gameBoard.markAsVisited(x, y);
+    for (int dx = -1; dx <= 1; dx++) {
+        for (int dy = -1; dy <=1; dy++) {
+            if (dx !=0 || dy!= 0) {
+                int newX = x + dx;
+                int newY = y + dy;
+                if (gameBoard.inBounds(newX, newY)) {
+                    str += gameBoard.charAt(newX, newY);
+                    if (str.length() >=4) {
+                        if (dictionary.contains(str)) {
+                            if (!guessedWords.contains(str)) {
+                            recordWordForPlayer(str, COMPUTER);
+                            guessedWords.add(str);
+                            }
+                        }
+                        else if (dictionary.containsPrefix(str)) {
+                            isCompWordOnBoard(newX, newY, str, gameBoard, dictionary, guessedWords);
+                        }
+                    }
+                    else if (str.length() < 4) {
+                        isCompWordOnBoard(newX, newY, str, gameBoard, dictionary, guessedWords);
+                    }
+                    
+                }
+            }
+        }
+    }
+    return false;
+}
+
+void computerTurn(board gameBoard, Lexicon& dictionary, HashSet<string>& guessedWords) {
+    string word = "";
+    for (int i = 0; i < gameBoard.getRows(); i++) {
+        for (int j = 0; j < gameBoard.getCols(); j++) {
+            char c = gameBoard.charAt(i,j);
+            word = c;
+            isCompWordOnBoard(i, j, word, gameBoard, dictionary, guessedWords);
+            word = "";
+
+        }
+    }
+    
+    
+}
+
+
+
+
 
 
 

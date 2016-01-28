@@ -51,6 +51,15 @@ int board :: getNumCubes() {
     return numCubes;
 }
 
+char board :: charAt(int x, int y) {
+    char c = gameGrid[x][y];
+    return c;
+}
+
+void board :: markAsVisited(int x, int y) {
+    gameGrid[x][y] = '/';
+    
+}
 
 bool board :: contains(char c) {
     for (int i = 0; i < rows; i++) {
@@ -63,10 +72,16 @@ bool board :: contains(char c) {
     return false;
 }
 
+
+bool board :: inBounds(int x, int y) {
+    if (x >= 0 && x < rows && y >= 0 && y < cols) {
+        return true;
+    }
+    return false;
+}
+
 //for random letter arrangements
 void board :: cubeArrangement() {
-    
-    Grid<char> cubeGrid(rows, cols);
     
     Vector<int> indexes;
     for (int i = 0; i < numCubes; i++) {
@@ -80,7 +95,7 @@ void board :: cubeArrangement() {
             cube newCube = STANDARD_CUBES[indexes[randomIndex]];
             char cubeFace = newCube.getCube();
             indexes.remove(randomIndex);
-            cubeGrid.set(i, j, cubeFace);
+            gameGrid.set(i, j, cubeFace);
             labelCube(i, j, cubeFace);
         }
     }
@@ -118,12 +133,17 @@ void board :: TestcubeArrangement() {
     }
 }
 
+
 void board :: drawNewBoard() {
     drawBoard(rows, cols);
-    //    cubeArrangement();
-    TestcubeArrangement();
+    string line = getLine("Do you want to enter your own board layout? ");
+    if (line == "yes") {
+        TestcubeArrangement();
+    }
+    else {
+        cubeArrangement();
+        
+    }
     
 }
-
-//HANDHANDHANDHAND
-    
+   
