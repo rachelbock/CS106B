@@ -40,10 +40,12 @@ void computerTurn(board gameBoard, Lexicon& dictionary, HashSet<string>& guessed
 /* Main program */
 
 int main() {
-    Lexicon dictionary ("/usr/share/dict/words");
-    HashSet <string> guessedWords;
+    
     
     board gameBoard(4,4);
+   
+    Lexicon dictionary ("/usr/share/dict/words");
+    HashSet <string> guessedWords;
     welcome();
     string line = getLine("Would you like to read the instructions?");
     if (toLowerCase(line) == "yes") {
@@ -51,6 +53,7 @@ int main() {
     }
     GWindow gw(BOGGLE_WINDOW_WIDTH, BOGGLE_WINDOW_HEIGHT);
     initGBoggle(gw);
+    gameBoard.drawNewBoard();
     guessWord(gameBoard, guessedWords, dictionary);
     computerTurn(gameBoard, dictionary, guessedWords);
     
@@ -143,7 +146,6 @@ bool isGuessOnBoard(int x, int y, string str, board gameBoard) {
 
 //highlightcube still in progress
 void guessWord(board gameBoard, HashSet<string>& guessedWords, Lexicon& dictionary) {
-    gameBoard.drawNewBoard();
     
     
     cout <<endl << "Ok, take all the time you want and find all the words you can. Signal that you're finished by entering an empty line" << endl << endl;
@@ -155,7 +157,8 @@ void guessWord(board gameBoard, HashSet<string>& guessedWords, Lexicon& dictiona
                 highlightCube(i, j, false);
             }
         }
-        string guess = getLine("Enter a word: ");
+        string guess1 = getLine("Enter a word: ");
+        string guess = toUpperCase(guess1);
         
         if (guess == "") {
             break;
@@ -179,7 +182,7 @@ void guessWord(board gameBoard, HashSet<string>& guessedWords, Lexicon& dictiona
                     }
                 }
                 if (hasBeenFound == false) {
-                    cout << "This word is not on the board" << endl;
+                    cout << "You can't make that word." << endl;
                     
                 }
                 else {
@@ -197,10 +200,9 @@ void guessWord(board gameBoard, HashSet<string>& guessedWords, Lexicon& dictiona
 
 }
 
-//Computer Recursion Function
 
 bool isCompWordOnBoard (int x, int y, string str, board gameBoard, Lexicon& dictionary, HashSet<string>& guessedWords) {
-    
+    cout << "X: " << x << " Y: " << y << " str: " << str << endl;
     gameBoard.markAsVisited(x, y);
     for (int dx = -1; dx <= 1; dx++) {
         for (int dy = -1; dy <=1; dy++) {
@@ -208,20 +210,20 @@ bool isCompWordOnBoard (int x, int y, string str, board gameBoard, Lexicon& dict
                 int newX = x + dx;
                 int newY = y + dy;
                 if (gameBoard.inBounds(newX, newY)) {
-                    str += gameBoard.charAt(newX, newY);
+                    string newWord = str + gameBoard.charAt(newX, newY);
                     if (str.length() >=4) {
-                        if (dictionary.contains(str)) {
-                            if (!guessedWords.contains(str)) {
-                            recordWordForPlayer(str, COMPUTER);
-                            guessedWords.add(str);
+                        if (dictionary.contains(newWord)) {
+                            if (!guessedWords.contains(newWord)) {
+                            recordWordForPlayer(newWord, COMPUTER);
+                            guessedWords.add(newWord);
                             }
                         }
-                        else if (dictionary.containsPrefix(str)) {
-                            isCompWordOnBoard(newX, newY, str, gameBoard, dictionary, guessedWords);
+                        else if (dictionary.containsPrefix(newWord)) {
+                            isCompWordOnBoard(newX, newY, newWord, gameBoard, dictionary, guessedWords);
                         }
                     }
                     else if (str.length() < 4) {
-                        isCompWordOnBoard(newX, newY, str, gameBoard, dictionary, guessedWords);
+                        isCompWordOnBoard(newX, newY, newWord, gameBoard, dictionary, guessedWords);
                     }
                     
                 }
@@ -232,11 +234,11 @@ bool isCompWordOnBoard (int x, int y, string str, board gameBoard, Lexicon& dict
 }
 
 void computerTurn(board gameBoard, Lexicon& dictionary, HashSet<string>& guessedWords) {
-    string word = "";
+    
     for (int i = 0; i < gameBoard.getRows(); i++) {
         for (int j = 0; j < gameBoard.getCols(); j++) {
-            char c = gameBoard.charAt(i,j);
-            word = c;
+            string word = charToString(gameBoard.charAt(i,j));
+            
             isCompWordOnBoard(i, j, word, gameBoard, dictionary, guessedWords);
             word = "";
 

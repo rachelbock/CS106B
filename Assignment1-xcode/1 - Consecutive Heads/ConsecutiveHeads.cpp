@@ -264,11 +264,14 @@ string mostXzibitWord(Lexicon& words) {
 
 int main() {
 
-    Lexicon words = Lexicon("LexiconForTest.txt");
-    cout << mostXzibitWord(words) << endl;
+//    Lexicon words = Lexicon("LexiconForTest.txt");
+//    cout << mostXzibitWord(words) << endl;
 
-    
+string word = "";
+    char c = 'c';
+    word = c;
 
+    cout << word << endl;
     
     
     
