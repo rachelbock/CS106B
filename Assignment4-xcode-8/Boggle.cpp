@@ -41,22 +41,48 @@ void computerTurn(board gameBoard, Lexicon& dictionary, HashSet<string>& guessed
 
 int main() {
     
-    
-    board gameBoard(4,4);
-   
-    Lexicon dictionary ("/usr/share/dict/words");
-    HashSet <string> guessedWords;
     welcome();
     string line = getLine("Would you like to read the instructions?");
     if (toLowerCase(line) == "yes") {
         giveInstructions();
     }
+    bool stillPlaying = true;
+    while (stillPlaying) {
+    cout <<endl << "You can choose standard Boggle (4x4 grid)" << endl;
+    cout << "or Big Boggle (5x5)." << endl;
+    string boardLine = getLine("Would you like Big Boggle?");
+        cout << endl;
+    if (boardLine == "yes") {
+        board gameBoard(5,5);
+        Lexicon dictionary ("/usr/share/dict/words");
+        HashSet <string> guessedWords;
+        
+        GWindow gw(BOGGLE_WINDOW_WIDTH, BOGGLE_WINDOW_HEIGHT);
+        initGBoggle(gw);
+        gameBoard.drawNewBoard();
+        guessWord(gameBoard, guessedWords, dictionary);
+        computerTurn(gameBoard, dictionary, guessedWords);
+        
+    }
+    else {
+    board gameBoard(4,4);
+    
+    Lexicon dictionary ("/usr/share/dict/words");
+    HashSet <string> guessedWords;
+    
     GWindow gw(BOGGLE_WINDOW_WIDTH, BOGGLE_WINDOW_HEIGHT);
     initGBoggle(gw);
     gameBoard.drawNewBoard();
     guessWord(gameBoard, guessedWords, dictionary);
     computerTurn(gameBoard, dictionary, guessedWords);
-    
+        cout << endl;
+        string stillPlay = getLine("Do you want to play again?");
+        if (stillPlay == "no") {
+            cout << "goodbye!";
+            break;
+        }
+    }
+    }
     
     return 0;
 }
