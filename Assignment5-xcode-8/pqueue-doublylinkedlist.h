@@ -8,6 +8,7 @@
 #define PQueue_DoublyLinkedList_Included
 
 #include <string>
+#include "ListNodeDouble.h"
 using namespace std;
 
 /* A class representing a priority queue backed by an unsorted,
@@ -41,9 +42,7 @@ public:
 	string dequeueMin();
 
 private:
-	// TODO: Fill this in with the implementation of your doubly-linked list
-	// priority queue.  You can add any fields, types, or methods that you
-	// wish.
+	ListNodeDouble* front;
 };
 
 #endif

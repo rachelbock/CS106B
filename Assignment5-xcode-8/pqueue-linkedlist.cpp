@@ -4,43 +4,95 @@
  * Implementation file for the LinkedListPriorityQueue
  * class.
  */
- 
+
 #include "pqueue-linkedlist.h"
 #include "error.h"
 
 LinkedListPriorityQueue::LinkedListPriorityQueue() {
-	// TODO: Fill this in!
+    front = NULL;
 }
 
 LinkedListPriorityQueue::~LinkedListPriorityQueue() {
-	// TODO: Fill this in!
+    while (front != NULL) {
+        dequeueMin();
+    }
 }
 
 int LinkedListPriorityQueue::size() {
-	// TODO: Fill this in!
-	
-	return 0;
+    ListNode *current = front;
+    int count = 0;
+    while (current != NULL) {
+        current = current->next;
+        count++;
+    }
+
+    return count;
 }
 
 bool LinkedListPriorityQueue::isEmpty() {
-	// TODO: Fill this in!
-	
-	return true;
+    return size() == 0;
 }
 
 void LinkedListPriorityQueue::enqueue(string value) {
-	// TODO: Fill this in!
+    if (size() == 0) {
+        front = new ListNode(value);
+    }
+    else if (front->next == NULL) {
+        if (front->data < value) {
+            front->next = new ListNode(value);
+        }
+        else {
+            ListNode *oldFront = front;
+            front = new ListNode(value);
+            front->next = oldFront;
+        }
+
+    }
+    else {
+        ListNode *current = front;
+        ListNode *previous = NULL;
+        while (current->data < value && current->next != NULL) {
+            previous = current;
+            current = current->next;
+        }
+        if (previous == NULL) {
+            ListNode *oldFront = front;
+            front = new ListNode(value);
+            front->next = oldFront;
+        }
+        else if (current->data < value) {
+            current->next = new ListNode(value);
+        }
+        else {
+            ListNode *newNode = new ListNode(value);
+            newNode->next = previous->next;
+            previous->next = newNode;
+        }
+    }
+
 }
 
 string LinkedListPriorityQueue::peek() {
-	// TODO: Fill this in!
-	
-	return "";
+    if (front == NULL) {
+        error("There is nothing left to peek at");
+    }
+    else {
+        return front->data;
+    }
 }
 
 string LinkedListPriorityQueue::dequeueMin() {
-	// TODO: Fill this in!
-	
-	return "";
+
+    if (isEmpty()) {
+        error("There is nothing left to dequeue");
+    }
+    string str = front->data;
+    ListNode *trash = front;
+    ListNode *current = front;
+    front = current->next;
+    delete (trash);
+
+    return str;
+
 }
 

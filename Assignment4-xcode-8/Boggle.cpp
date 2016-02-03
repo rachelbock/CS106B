@@ -40,12 +40,12 @@ void computerTurn(board gameBoard, Lexicon& dictionary, HashSet<string>& guessed
 /* Main program */
 
 int main() {
-    
     welcome();
     string line = getLine("Would you like to read the instructions?");
     if (toLowerCase(line) == "yes") {
         giveInstructions();
     }
+    
     bool stillPlaying = true;
     while (stillPlaying) {
     cout <<endl << "You can choose standard Boggle (4x4 grid)" << endl;
@@ -135,21 +135,28 @@ void giveInstructions() {
     
 }
 
-
+/*
+ *Function: isGuessOnBoard
+ *Used in guessWord function to see if users input word is on the board.
+ *Takes in the x,y location of the starting character of the word, the word and the board.
+ */
 
 bool isGuessOnBoard(int x, int y, string str, board gameBoard) {
     
+    //base case - if the string is only one character and that character is the character at the x,y location, then return true.
     if (str.length() == 1 && str[0] == gameBoard.charAt(x, y)) {
         highlightCube(x, y, true);
         return true;
         
     }
     else {
+        // recursive case - check to see that the first character of the string is on the gameboard at x,y, mark it as visited (changes the character to a / so it is no longer usable), and highlight it.
         if (str[0] == gameBoard.charAt(x, y)) {
             gameBoard.markAsVisited(x, y);
             highlightCube(x, y, true);
+        // create a substring that removes the first character
         string strSub = str.substr(1, str.length() -1);
-            
+            //check all of the x,y locations within one step of the starting character. Send back in each location that is inbounds with the substring.
             for (int dx = -1; dx <= 1; dx++) {
                 for (int dy = -1; dy <=1; dy++) {
                     if (dx !=0 || dy!= 0) {

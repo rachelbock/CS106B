@@ -41,9 +41,10 @@ public:
 	string dequeueMin();
 
 private:
-	// TODO: Fill this in with the implementation of your unsorted vector
-	// priority queue.  You can add any fields, types, or methods that you
-	// wish.
+	string* myArray;
+	int mySize;
+	int myCapacity;
+	void checkResize();
 };
 
 #endif

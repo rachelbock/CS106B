@@ -13,6 +13,9 @@ using namespace std;
 /* A class representing a priority queue backed by a sorted,
  * singly-linked list.
  */
+
+#include "ListNode.h"
+
 class LinkedListPriorityQueue {
 public:
 	/* Constructs a new, empty priority queue backed by a sorted linked list. */
@@ -41,9 +44,7 @@ public:
 	string dequeueMin();
 	
 private:
-	// TODO: Fill this in with the implementation of your sorted linked list
-	// priority queue.  You can add any fields, types, or methods that you
-	// wish.
+	ListNode* front;
 };
 
 #endif

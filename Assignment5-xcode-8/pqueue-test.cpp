@@ -15,11 +15,14 @@
 #include "vector.h"
 #include "console.h"
 #include "error.h"
+#include "RageLinkedList.h"
 #include <iostream>
 #include <string>
 #include <sstream>    // For istringstream
 #include <algorithm>  // For sort, reverse
 #include <functional> // For greater
+#include "RageVector.h"
+#include "RageDoubleLinkList.h"
 using namespace std;
 
 /* Macro: checkCondition
@@ -1095,9 +1098,10 @@ void displayMenu() {
  * the tests in this file.
  */
 int main() {
+
 	while (true) {
 		displayMenu();
-		
+
 		/* Respond to the user's choice. */
 		switch (getInteger("Enter choice: ")) {
 		case TEST_VECTOR:
@@ -1117,7 +1121,7 @@ int main() {
 			break;
 		case REPL_DOUBLY_LINKED_LIST:
 			replTestPriorityQueue<DoublyLinkedListPriorityQueue> ();
-			break;			
+			break;
 		case TEST_HEAP:
 			testPriorityQueue<HeapPriorityQueue> ();
 			break;
@@ -1136,8 +1140,10 @@ int main() {
 			cout << "Sorry, but I don't know how to do that." << endl;
 			break;
 		}
-	}
-	
-	return 0;
+
+}
+
+
+ return 0;
 }
 
