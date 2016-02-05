@@ -86,12 +86,38 @@ void HeapPriorityQueue::bubbleUp() {
 
 void HeapPriorityQueue::bubbleDown() {
 int index = 1;
-	while (index <= mySize && myArray[index] > myArray[(index*2)+1]) {
-		string temp = myArray[index];
-		myArray[index] = myArray[(index*2)+1];
-		myArray[(index*2)+1] = temp;
-		index = (index*2)+1;
+	while (index <= mySize) {
+		if (myArray[index*2] > myArray[(index*2)+1]) {
+			if (myArray[(index * 2) + 1] < myArray[index]) {
+				string temp = myArray[index];
+				myArray[index] = myArray[(index * 2) + 1];
+				myArray[(index * 2) + 1] = temp;
+				index = (index * 2) + 1;
+			}
+		}
+		else {
+			if (myArray[index*2] < myArray[index]) {
+				string temp = myArray[index];
+				myArray[index] = myArray[index*2];
+				myArray[index*2] = temp;
+				index = index*2;
+			}
+		}
 	}
+
+//	while (index <= mySize && myArray[index] > myArray[(index*2)]) {
+//		string temp = myArray[index];
+//		myArray[index] = myArray[(index*2)];
+//		myArray[(index*2)] = temp;
+//		index = (index*2);
+//	}
+//
+//	while (index <= mySize && myArray[index] > myArray[(index*2)+1]) {
+//		string temp = myArray[index];
+//		myArray[index] = myArray[(index*2)+1];
+//		myArray[(index*2)+1] = temp;
+//		index = (index*2)+1;
+//	}
 
 }
 
