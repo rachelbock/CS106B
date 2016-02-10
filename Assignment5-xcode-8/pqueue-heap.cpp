@@ -32,7 +32,6 @@ void HeapPriorityQueue::enqueue(string value) {
 	myArray[mySize+1] = value;
 	mySize++;
 	bubbleUp();
-
 }
 
 string HeapPriorityQueue::peek() {
@@ -62,9 +61,9 @@ string HeapPriorityQueue::dequeueMin() {
 }
 
 void HeapPriorityQueue::checkResize() {
-	if (mySize == myCapacity) {
+	if (mySize == myCapacity-1) {
 		string* newArray = new string[2 * myCapacity];
-		for (int i = 0; i < mySize; i++) {
+		for (int i = 0; i <= mySize; i++) {
 			newArray[i] = myArray[i];
 		}
 		delete[] myArray;
@@ -85,39 +84,43 @@ void HeapPriorityQueue::bubbleUp() {
 }
 
 void HeapPriorityQueue::bubbleDown() {
-int index = 1;
+	int index = 1;
 	while (index <= mySize) {
-		if (myArray[index*2] > myArray[(index*2)+1]) {
-			if (myArray[(index * 2) + 1] < myArray[index]) {
-				string temp = myArray[index];
-				myArray[index] = myArray[(index * 2) + 1];
-				myArray[(index * 2) + 1] = temp;
-				index = (index * 2) + 1;
+		if(index*2 > mySize && (index*2)+1 > mySize) {
+			break;
+		}
+		else if (index*2 <= mySize && (index*2)+1 <= mySize) {
+			if (myArray[index*2] >= myArray[index] && myArray[(index*2)+1] >= myArray[index]) {
+				break;
+			}
+			else if (myArray[index*2] < myArray[(index*2)+1]) {
+				if (myArray[index*2] < myArray[index]) {
+					string temp = myArray[index];
+					myArray[index] = myArray[index * 2];
+					myArray[index * 2] = temp;
+					index = index * 2;
+				}
+			}
+			else {
+				if (myArray[(index * 2) + 1] < myArray[index]) {
+					string temp = myArray[index];
+					myArray[index] = myArray[(index * 2) + 1];
+					myArray[(index * 2) + 1] = temp;
+					index = (index * 2) + 1;
+				}
 			}
 		}
-		else {
-			if (myArray[index*2] < myArray[index]) {
+		else if (index*2 <= mySize && (index*2)+1 > mySize) {
+			if (myArray[index*2] >= myArray[index]) {
+				break;
+			}
+			else if (myArray[index*2] < myArray[index]) {
 				string temp = myArray[index];
-				myArray[index] = myArray[index*2];
-				myArray[index*2] = temp;
-				index = index*2;
+				myArray[index] = myArray[index * 2];
+				myArray[index * 2] = temp;
+				index = index * 2;
 			}
 		}
 	}
-
-//	while (index <= mySize && myArray[index] > myArray[(index*2)]) {
-//		string temp = myArray[index];
-//		myArray[index] = myArray[(index*2)];
-//		myArray[(index*2)] = temp;
-//		index = (index*2);
-//	}
-//
-//	while (index <= mySize && myArray[index] > myArray[(index*2)+1]) {
-//		string temp = myArray[index];
-//		myArray[index] = myArray[(index*2)+1];
-//		myArray[(index*2)+1] = temp;
-//		index = (index*2)+1;
-//	}
-
 }
 

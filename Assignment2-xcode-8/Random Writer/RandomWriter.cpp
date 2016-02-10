@@ -71,23 +71,25 @@ string randomWriter(HashMap<string, Vector<string> > hMap, int n) {
 string randomWriterReader (string filename, int n) {
     
     HashMap<string, Vector<string> > hMap;
-    
-    
+
+    //Open the file provided.
     ifstream input;
     input.open(filename);
     
-    
     string line;
     string text;
+    //While there are lines in the text, add them to a string called text with a carriage return after each line.
     while (getline(input, line)) {
         text += line + "\n";
     }
     
+    //for each character in the file minus the markov order, create a blank key and value.
     for (int i = 0; i < text.size() - n; i++) {
         string key = "";
         string value = "";
         
-  
+        //for each character between 0 and markov order, set the key to be the character at that point up to the markov order. If
+        //j is the last markov order than set the value to be teh character at text[i+n}
         for (int j = 0; j < n; j++) {
             
             key += text[i+j];
@@ -95,7 +97,8 @@ string randomWriterReader (string filename, int n) {
                 value += text[i+n];
             }
         }
-        
+        //check if the hashmap contains the key - if it does, add the value to the existing value hashmap.
+        //If not, then create a new vector and add it and add that to the hashmap.
         if (hMap.containsKey(key)) {
             Vector<string>& existingValue = hMap[key];
             existingValue.add(value);

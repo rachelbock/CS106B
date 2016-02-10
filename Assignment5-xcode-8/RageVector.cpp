@@ -94,6 +94,10 @@ void RageVector :: checkResize() {
     }
 }
 
+void RageVector ::set(string str, int index) {
+    myArray[index] = str;
+}
+
 ostream& operator <<(ostream& out, const RageVector& v) {
     out << "{";
 

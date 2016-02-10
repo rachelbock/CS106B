@@ -115,7 +115,11 @@ set(SOURCE_FILES
         RageVector.h
         RageVector.cpp
         RageDoubleLinkList.h
-        RageDoubleLinkList.cpp)
+        RageDoubleLinkList.cpp
+        RageBinaryTree.h
+        RageBinaryTree.cpp
+        rageDeque.h
+        rageDeque.cpp)
 
 include_directories(StanfordCPPLib)
 #add_library(StanfordCPPLib)

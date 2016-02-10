@@ -2,9 +2,8 @@
 <module type="CPP_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/pqueue-linkedlist.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/pqueue-extra.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/RageVector.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/RageBinaryTree.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/pqueue-test.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/pqueue-doublylinkedlist.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/StanfordCPPLib/console.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/StanfordCPPLib/gobjects.cpp" isTestSource="false" />
@@ -101,18 +100,23 @@
       <sourceFolder url="file://$MODULE_DIR$/StanfordCPPLib/error.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/StanfordCPPLib/gfilechooser.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/StanfordCPPLib/base64.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/RageBinaryTree.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/rageDeque.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/pqueue-heap.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RageDoubleLinkList.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/RageVector.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/pqueue-extra.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/pqueue-vector.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/pqueue-linkedlist.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/rageDeque.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/pqueue-vector.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/pqueue-test.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/pqueue-extra.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RageDoubleLinkList.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RageLinkedList.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/pqueue-doublylinkedlist.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/pqueue-heap.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/pqueue-linkedlist.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RageLinkedList.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/RageVector.h" isTestSource="false" />
     </content>

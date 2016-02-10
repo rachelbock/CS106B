@@ -23,6 +23,7 @@
 #include <functional> // For greater
 #include "RageVector.h"
 #include "RageDoubleLinkList.h"
+#include "RageBinaryTree.h"
 using namespace std;
 
 /* Macro: checkCondition
@@ -1098,50 +1099,58 @@ void displayMenu() {
  * the tests in this file.
  */
 int main() {
+//
+//	while (true) {
+//		displayMenu();
+//
+//		/* Respond to the user's choice. */
+//		switch (getInteger("Enter choice: ")) {
+//		case TEST_VECTOR:
+//			testPriorityQueue<VectorPriorityQueue> ();
+//			break;
+//		case REPL_VECTOR:
+//			replTestPriorityQueue<VectorPriorityQueue> ();
+//			break;
+//		case TEST_LINKED_LIST:
+//			testPriorityQueue<LinkedListPriorityQueue> ();
+//			break;
+//		case REPL_LINKED_LIST:
+//			replTestPriorityQueue<LinkedListPriorityQueue> ();
+//			break;
+//		case TEST_DOUBLY_LINKED_LIST:
+//			testPriorityQueue<DoublyLinkedListPriorityQueue> ();
+//			break;
+//		case REPL_DOUBLY_LINKED_LIST:
+//			replTestPriorityQueue<DoublyLinkedListPriorityQueue> ();
+//			break;
+//		case TEST_HEAP:
+//			testPriorityQueue<HeapPriorityQueue> ();
+//			break;
+//		case REPL_HEAP:
+//			replTestPriorityQueue<HeapPriorityQueue> ();
+//			break;
+//		case TEST_EXTRA:
+//			testPriorityQueue<ExtraPriorityQueue> ();
+//			break;
+//		case REPL_EXTRA:
+//			replTestPriorityQueue<ExtraPriorityQueue> ();
+//			break;
+//		case QUIT:
+//			return 0;
+//		default:
+//			cout << "Sorry, but I don't know how to do that." << endl;
+//			break;
+//		}
 
-	while (true) {
-		displayMenu();
+//}
 
-		/* Respond to the user's choice. */
-		switch (getInteger("Enter choice: ")) {
-		case TEST_VECTOR:
-			testPriorityQueue<VectorPriorityQueue> ();
-			break;
-		case REPL_VECTOR:
-			replTestPriorityQueue<VectorPriorityQueue> ();
-			break;
-		case TEST_LINKED_LIST:
-			testPriorityQueue<LinkedListPriorityQueue> ();
-			break;
-		case REPL_LINKED_LIST:
-			replTestPriorityQueue<LinkedListPriorityQueue> ();
-			break;
-		case TEST_DOUBLY_LINKED_LIST:
-			testPriorityQueue<DoublyLinkedListPriorityQueue> ();
-			break;
-		case REPL_DOUBLY_LINKED_LIST:
-			replTestPriorityQueue<DoublyLinkedListPriorityQueue> ();
-			break;
-		case TEST_HEAP:
-			testPriorityQueue<HeapPriorityQueue> ();
-			break;
-		case REPL_HEAP:
-			replTestPriorityQueue<HeapPriorityQueue> ();
-			break;
-		case TEST_EXTRA:
-			testPriorityQueue<ExtraPriorityQueue> ();
-			break;
-		case REPL_EXTRA:
-			replTestPriorityQueue<ExtraPriorityQueue> ();
-			break;
-		case QUIT:
-			return 0;
-		default:
-			cout << "Sorry, but I don't know how to do that." << endl;
-			break;
-		}
-
-}
+	RageBinaryTree rbt;
+	rbt.add(5);
+	rbt.add(10);
+	rbt.add(1);
+	rbt.add(7);
+	rbt.add(3);
+	rbt.printSideways();
 
 
  return 0;

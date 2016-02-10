@@ -4,6 +4,9 @@
 
 #ifndef ASSIGNMENT5_XCODE_8_TREENODE_H
 #define ASSIGNMENT5_XCODE_8_TREENODE_H
+
+#include <iostream>
+#include <string>
 using namespace std;
 
 struct TreeNode {
@@ -11,7 +14,7 @@ struct TreeNode {
     TreeNode* left;
     TreeNode* right;
 
-    TreeNode(int data, TreeNode* left = NULL, TreeNOde* right = NULL) {
+    TreeNode(int data, TreeNode* left = NULL, TreeNode* right = NULL) {
         this->data = data;
         this->left = left;
         this->right = right;
