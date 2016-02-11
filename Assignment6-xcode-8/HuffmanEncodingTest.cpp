@@ -823,9 +823,10 @@ int main() {
 
 
 	ifstream stream;
-	stream.open("HappyHipHop");
+	stream.open("HappyHipHop.txt");
 	Map<ext_char , int> frequencies = getFrequencyTable(stream);
 	cout << frequencies << endl;
+	buildEncodingTree(frequencies);
 
 
 	return 0;

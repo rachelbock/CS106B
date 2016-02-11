@@ -35,7 +35,7 @@ Map<ext_char, int> getFrequencyTable(istream& stream) {
 	//for each character in text - check to see if the current frequencies map contains the key. If it does then
 	//get the key's value and increase it by one. If it does not, add it to the map with a value of 1.
 	for (int i = 0; i < text.size(); i++) {
-		char c = text[i];
+		ext_char c = text[i];
 		cout << c << endl;
 		if (frequencies.containsKey(c)) {
 			int value = frequencies.get(c);
@@ -66,9 +66,35 @@ Map<ext_char, int> getFrequencyTable(istream& stream) {
  */
 Node* buildEncodingTree(Map<ext_char, int>& frequencies) {
 
+	PriorityQueue<Node*> pqueue;
+	for (ext_char key : frequencies) {
+		int priority = frequencies.get(key);
+		Node *root = new Node;
+		root->character = key;
+		root->weight = priority;
+		root->zero = NULL;
+		root->one = NULL;
+		pqueue.add(root, root->weight);
+		cout << pqueue << endl;
 
-	
-	return NULL;
+
+		while (pqueue.size() > 1) {
+
+			int priority1 = pqueue.peekPriority();
+			Node *char1 = pqueue.dequeue();
+			int priority2 = pqueue.peekPriority();
+			Node *char2 = pqueue.dequeue();
+			int newPriority = priority1 + priority2;
+			Node *newNode = new Node;
+			newNode->character = NOT_A_CHAR;
+			newNode->zero = char1;
+			newNode->one = char2;
+			newNode->weight = newPriority;
+			pqueue.add(newNode, newNode->weight);
+		}
+	}
+
+	return pqueue.dequeue();
 }
 
 /* Function: freeTree
