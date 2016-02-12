@@ -109,5 +109,6 @@ set(SOURCE_FILES
     ReferenceHuffmanEncoding.h)
 
 include_directories(StanfordCPPLib)
+link_libraries(dl)
 
 add_executable(Assignment6_xcode_8 ${SOURCE_FILES})
