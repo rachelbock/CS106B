@@ -825,9 +825,18 @@ int main() {
 	ifstream stream;
 	stream.open("HappyHipHop.txt");
 	Map<ext_char , int> frequencies = getFrequencyTable(stream);
-	cout << frequencies << endl;
-	buildEncodingTree(frequencies);
 
+	Node* encodingTree = buildEncodingTree(frequencies);
+
+	ofbstream out;
+	out.open("out.dat");
+
+	stream.close();
+	stream.open("HappyHipHop.txt");
+
+	encodeFile(stream, encodingTree, out);
+
+	out.close();
 
 	return 0;
 }
