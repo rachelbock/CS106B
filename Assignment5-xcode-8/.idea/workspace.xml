@@ -51,6 +51,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="RageBinaryTree.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RageBinaryTree.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="rageDeque.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rageDeque.h">
           <provider selected="true" editor-type-id="text-editor">
@@ -73,16 +83,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ListNodeDouble.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ListNodeDouble.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="rageDeque.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rageDeque.cpp">
           <provider selected="true" editor-type-id="text-editor">
@@ -96,8 +96,8 @@
       <file leaf-file-name="RageBinaryTree.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RageBinaryTree.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.25249168">
-              <caret line="126" column="70" selection-start-line="126" selection-start-column="70" selection-end-line="126" selection-end-column="70" />
+            <state vertical-scroll-proportion="0.41095892">
+              <caret line="62" column="51" selection-start-line="62" selection-start-column="51" selection-end-line="62" selection-end-column="51" />
               <folding>
                 <element signature="e#37#64#0" expanded="true" />
               </folding>
@@ -108,8 +108,8 @@
       <file leaf-file-name="RageDoubleLinkList.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/RageDoubleLinkList.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.111111">
-              <caret line="132" column="4" selection-start-line="132" selection-start-column="4" selection-end-line="138" selection-end-column="17" />
+            <state vertical-scroll-proportion="-16.11111">
+              <caret line="65" column="20" selection-start-line="65" selection-start-column="20" selection-end-line="65" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -658,24 +658,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RageBinaryTree.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding>
-            <element signature="e#127#148#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/RageDoubleLinkList.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.111111">
-          <caret line="132" column="4" selection-start-line="132" selection-start-column="4" selection-end-line="138" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ListNodeDouble.h">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -742,10 +724,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/RageDoubleLinkList.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.11111">
+          <caret line="65" column="20" selection-start-line="65" selection-start-column="20" selection-end-line="65" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RageBinaryTree.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/RageBinaryTree.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25249168">
-          <caret line="126" column="70" selection-start-line="126" selection-start-column="70" selection-end-line="126" selection-end-column="70" />
+        <state vertical-scroll-proportion="0.41095892">
+          <caret line="62" column="51" selection-start-line="62" selection-start-column="51" selection-end-line="62" selection-end-column="51" />
           <folding>
             <element signature="e#37#64#0" expanded="true" />
           </folding>
