@@ -144,6 +144,5 @@ void decompress(ibstream& infile, ostream& outfile);
 
 void encodeTree(Node* tree, Map<ext_char, string>&, string encoding);
 
-char getCharFromTree(Node* tree, Map<ext_char, string> encodings);
 
 #endif

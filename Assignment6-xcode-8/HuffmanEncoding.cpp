@@ -29,7 +29,7 @@ Map<ext_char, int> getFrequencyTable(istream &stream) {
 
     //while there are still lines in the stream - add the lines to a string called text.
     while (getline(stream, line)) {
-        text += line;
+        text += line + "\n";
     }
     //for each character in text - check to see if the current frequencies map contains the key. If it does then
     //get the key's value and increase it by one. If it does not, add it to the map with a value of 1.
@@ -45,7 +45,6 @@ Map<ext_char, int> getFrequencyTable(istream &stream) {
     }
     //adds end of file to map.
     frequencies.add(PSEUDO_EOF, 1);
-    cout << frequencies << endl;
     return frequencies;
 }
 
@@ -134,7 +133,7 @@ void encodeFile(istream &infile, Node *encodingTree, obstream &outfile) {
     encodeTree(encodingTree, encodings, "");
 
     while (getline(infile, line)) {
-        text += line;
+        text += line + "\n";
     }
     for (int i = 0; i <= text.size(); i++) {
         ext_char c;
@@ -147,7 +146,6 @@ void encodeFile(istream &infile, Node *encodingTree, obstream &outfile) {
 
         string value = encodings.get(c);
         for (int j = 0; j < value.size(); j++) {
-            cout << value;
             if (value[j] == '0') {
                 outfile.writeBit(0);
             }
@@ -156,7 +154,6 @@ void encodeFile(istream &infile, Node *encodingTree, obstream &outfile) {
             }
         }
     }
-    cout << endl;
 }
 
 
@@ -173,29 +170,31 @@ void encodeFile(istream &infile, Node *encodingTree, obstream &outfile) {
  *   - The output file is open and ready for writing.
  */
 void decodeFile(ibstream &infile, Node *encodingTree, ostream &file) {
-    string text = "";
-    string line = "";
 
-    while (getline(infile, line)) {
-        text += line;
-    }
-    //in progress
-    for (int i = 0; i < text.size(); i++) {
-        while (encodingTree != NULL) {
-            if (text[i] = '0') {
-                encodingTree->zero;
+    Node* current = encodingTree;
+    while (true) {
+        int bit = infile.readBit();
+        if (bit == 0) {
+            current = current->zero;
+            if (current->zero == NULL && current->one == NULL) {
+                if (current->character == PSEUDO_EOF) {
+                    break;
+                }
+                file << (char) current->character;
+                current = encodingTree;
             }
-            else {
-                encodingTree->one;
-            }
-            if (encodingTree->zero == NULL && encodingTree->one == NULL) {
-                //write character that is there to the file. should be
-                //encodingTree->character. Not sure how to implement.
+        }
+        else if (bit == 1) {
+            current = current->one;
+            if (current->zero == NULL && current->one == NULL) {
+                if (current->character == PSEUDO_EOF) {
+                    break;
+                }
+                file << (char) current->character;
+                current = encodingTree;
             }
         }
     }
-
-
 }
 
 /* Function: writeFileHeader
@@ -306,7 +305,11 @@ Map<ext_char, int> readFileHeader(ibstream &infile) {
  * primarily be glue code.
  */
 void compress(ibstream &infile, obstream &outfile) {
-    // TODO: Implement this!
+    Map <ext_char, int> frequencies = getFrequencyTable(infile);
+    Node *tree = buildEncodingTree(frequencies);
+    infile.rewind();
+    writeFileHeader(outfile, frequencies);
+    encodeFile(infile, tree, outfile);
 }
 
 /* Function: decompress
@@ -322,7 +325,10 @@ void compress(ibstream &infile, obstream &outfile) {
  * primarily be glue code.
  */
 void decompress(ibstream &infile, ostream &outfile) {
-    // TODO: Implement this!
+    Map <ext_char, int> frequencies = readFileHeader(infile);
+    Node* tree = buildEncodingTree(frequencies);
+
+    decodeFile(infile, tree, outfile);
 }
 
 void encodeTree(Node *tree, Map<ext_char, string>& encodings, string encoding) {
@@ -339,8 +345,3 @@ void encodeTree(Node *tree, Map<ext_char, string>& encodings, string encoding) {
 
 }
 
-char getCharFromTree(Node* tree, Map<ext_char, string> encodings) {
-    if (tree != NULL) {
-        //TODO: implement this!
-    }
-}

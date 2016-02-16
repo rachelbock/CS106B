@@ -822,21 +822,22 @@ int main() {
 //	}
 
 
-	ifstream stream;
-	stream.open("HappyHipHop.txt");
-	Map<ext_char , int> frequencies = getFrequencyTable(stream);
-
-	Node* encodingTree = buildEncodingTree(frequencies);
+	ifbstream stream;
+	stream.open("mobyDick.txt");
 
 	ofbstream out;
 	out.open("out.dat");
 
+	compress(stream, out);
+
 	stream.close();
-	stream.open("HappyHipHop.txt");
-
-	encodeFile(stream, encodingTree, out);
-
 	out.close();
+
+	ifbstream dec;
+	dec.open("out.dat");
+	ofstream newOut;
+	newOut.open("out.txt");
+	decompress(dec, newOut);
 
 	return 0;
 }
