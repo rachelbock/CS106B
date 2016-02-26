@@ -11,6 +11,7 @@
 #include "TrailblazerPQueue.h"
 #include "queue.h"
 #include <math.h>
+#include "random.h"
 using namespace std;
 
 /* Function: shortestPath
@@ -30,7 +31,7 @@ using namespace std;
 Vector<Loc> shortestPath(Loc start,
              Loc end,
              Grid<double>& world,
-             double costFn(Loc from, Loc to, Grid<double>& world)) {
+             double costFn(Loc from, Loc to, Grid<double>& world), double heuristic (Loc start, Loc end, Grid<double>& world)) {
 
 	//Vector to store final path
     Vector<Loc> path;
@@ -61,7 +62,7 @@ Vector<Loc> shortestPath(Loc start,
     
     //Color the start location to be Yellow and add it to the priority queue with a priority of zero.
     colorCell(world, start, YELLOW);
-    pq.enqueue(startNode, 0);
+    pq.enqueue(startNode, startNode->cost+heuristic(start, end, world));
     seenLocs.put(start, startNode);
     
     while (!pq.isEmpty()) {
@@ -111,13 +112,13 @@ Vector<Loc> shortestPath(Loc start,
                                     LocNode* seenNode = seenLocs.get(neighborNode->loc);
                                     if (seenNode->cost > neighborNode->cost) {
                                         seenLocs.put(neighborNode->loc, neighborNode);
-                                        pq.enqueue(neighborNode, neighborNode->cost);
+                                        pq.enqueue(neighborNode, neighborNode->cost+heuristic(neighborNode->loc, end, world));
                                     }
                                 }
                                 //If the neighborNode is not already in the seen map - color it Yellow and enqueue it into the pq. Also add it to the seen Map.
                                 else {
                                     colorCell(world, neighbor, YELLOW);
-                                    pq.enqueue(neighborNode, neighborNode->cost);
+                                    pq.enqueue(neighborNode, neighborNode->cost+heuristic(neighborNode->loc, end, world));
                                     seenLocs.put(neighborNode->loc, neighborNode);
                                 }
                             }
@@ -139,8 +140,87 @@ Vector<Loc> shortestPath(Loc start,
     return path;
 }
 
+//Place each node into its own cluster.
+//Insert all edges in the graph into a priority queue.
+//While there are two or more clusters remaining.
+//Dequeue an edge (e) from the pq.
+//If the endpoints of edge are not in the same cluster:
+//Merge the clusters containing the endpoints of the edge.
+//Add edge to the spanning tree.
+//Return the spanning tree.
+
+
+
+
 Set<Edge> createMaze(int numRows, int numCols) {
-	// TODO: Fill this in!
-	error("createMaze is not implemented yet.");
-    return Set<Edge>();
+	Set <Edge> maze;
+    
+    //make cluster as set
+    Vector<Set<Loc> > clusters;
+    
+    TrailblazerPQueue<Edge> pq;
+    
+    for (int i = 0; i < numCols; i++) {
+        for (int j = 0; j < numRows; j++) {
+            Loc loc;
+            loc.col = i;
+            loc.row = j;
+            Set<Loc> cluster;
+            cluster.add(loc);
+            clusters.add(cluster);
+            while (i+1 <= numCols) {
+                Loc endLoc;
+                endLoc.col = i+1;
+                endLoc.row = j;
+                Edge endEdge = makeEdge(loc, endLoc);
+                double d = randomReal(0, numCols*numRows);
+                pq.enqueue(endEdge, d);
+                if (j-1 >= 0) {
+                    Loc oneEnd;
+                    oneEnd.col = i+1;
+                    oneEnd.row = j-1;
+                    Edge topEdge = makeEdge(loc, oneEnd);
+                    double d = randomReal(0, numCols* numRows);
+                    pq.enqueue(topEdge, d);
+                }
+                if (j+1 <= numRows) {
+                    Loc end;
+                    end.col = i+1;
+                    end.row = j+1;
+                    Edge bottomEdge = makeEdge(loc, end);
+                    double d = randomReal(0, numCols* numRows);
+                    pq.enqueue(bottomEdge, d);
+                }
+            }
+        }
+    }
+    
+    Set<Loc> newCluster;
+    while (clusters.size() >= 2) {
+        Edge edge = pq.dequeueMin();
+        for (int i = 0; i < clusters.size(); i++) {
+            Set<Loc> cluster = clusters[i];
+            if (cluster.contains(edge.start)) {
+                if (cluster.contains(edge.end)) {
+                    //do nothing
+                }
+                else {
+                    maze.add(edge);
+                    for (Loc loc : cluster) {
+                        newCluster.add(loc);
+                    }
+                    for (int j = 0; j < clusters.size(); j++) {
+                        Set <Loc> endCluster = clusters[i];
+                        if (endCluster.contains(edge.end)) {
+                            for (Loc endLoc : endCluster) {
+                                newCluster.add(endLoc);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    return maze;
 }
